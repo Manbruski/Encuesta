@@ -32,10 +32,11 @@ class HomeController extends Controller
   */
 
   public function data($var1=null, $var2=null, $var3=null, $var4=null){
-    return [$var1, $var2, $var3, $var4];
+    return array_filter([$var1, $var2, $var3, $var4]);
   }
   public function index()
   {
+    //Configuracion de Highcharts.js
     $type = ["type" => "pie"];
     $tooltip = ["pointFormat" =>  "{series.name}: <b>{point.percentage:.1f}%</b>"];
     $plotOptions = [
@@ -48,20 +49,21 @@ class HomeController extends Controller
       ]
     ];
     //---------------------------------------------------------------------------------------------------------------------------
-    $r1 = ["name"=> "Si", "y" => $this->p1->pluck('val1')[0]];
-    $r2 = ["name"=> "No", "y" => $this->p1->pluck('val2')[0]];
-    $r3 = ["name"=> "Algunas veces", "y" => $this->p1->pluck('val3')[0]];
-
+    $r1 = ["name"=> "Si", "y" => isset($this->p1->pluck('val1')[0]) ? $this->p1->pluck('val1')[0] : 0];
+    $r2 = ["name"=> "No", "y" => isset($this->p1->pluck('val2')[0]) ? $this->p1->pluck('val2')[0]  : 0];
+    $r3 = ["name"=> "Algunas veces", "y" => isset($this->p1->pluck('val3')[0]) ? $this->p1->pluck('val3')[0] : 0];
+    $prueba1 = ["name"=> "Si", "y" => $this->p1->select('val1', 'val2', 'val3')->get()];
     $pregunta1 = [
       "chart" => $type,
       "title" => ["text" => "¿Alguna vez ha tenido problemas al comunicarse con alguna persona con limitaciones verbales?"],
       "tooltip" => $tooltip,
       "plotOptions" => $plotOptions,
-      "series" => [["name" => "Respuestas", "data" => [$r1, $r2, $r3]]]
+      "series" => [["name" => "Respuestas", "data" => $this->data($r1, $r2, $r3)]]
     ];
+    //dd($prueba1, $r1);
     //---------------------------------------------------------------------------------------------------------------------------
-    $r4 = ["name"=> "Si", "y" => $this->p2->pluck('val1')[0]*100];
-    $r5 = ["name"=> "No", "y" => $this->p2->pluck('val2')[0]*100];
+    $r4 = ["name"=> "Si", "y" => isset($this->p2->pluck('val1')[0]) ? $this->p2->pluck('val1')[0] : 0];
+    $r5 = ["name"=> "No", "y" => isset($this->p2->pluck('val2')[0]) ? $this->p2->pluck('val2')[0] : 0];
 
     $pregunta2 = [
       "chart" => $type,
@@ -71,9 +73,9 @@ class HomeController extends Controller
       "series" => [["name" => "Respuestas", "data" => [$r4, $r5]]]
     ];
     //---------------------------------------------------------------------------------------------------------------------------
-    $r6 = ["name"=> "Si", "y" => $this->p3->pluck('val1')[0]];
-    $r7 = ["name"=> "No", "y" => $this->p3->pluck('val2')[0]];
-dd($this->data($r6, $r7));
+    $r6 = ["name"=> "Si", "y" => isset($this->p3->pluck('val1')[0]) ? $this->p3->pluck('val1')[0] : 0];
+    $r7 = ["name"=> "No", "y" => isset($this->p3->pluck('val2')[0]) ? $this->p3->pluck('val2')[0] : 0];
+
     $pregunta3 = [
       "chart" => $type,
       "title" => ["text" => "¿Está de acuerdo en que se crea un dispositivo capaz de escribir en una pantalla los pensamientos de una persona?"],
@@ -82,9 +84,9 @@ dd($this->data($r6, $r7));
       "series" => [["name" => "Respuestas", "data" => $this->data($r6, $r7)]]
     ];
     //---------------------------------------------------------------------------------------------------------------------------
-    $r8 = ["name"=> "Si", "y" => $this->p4->pluck('val1')[0]*100];
-    $r9 = ["name"=> "No", "y" => $this->p4->pluck('val2')[0]*100];
-    $r10 = ["name"=> "No", "y" => $this->p4->pluck('val3')[0]*100];
+    $r8 = ["name"=> "Bastante", "y" => isset($this->p4->pluck('val1')[0]) ? $this->p4->pluck('val1')[0] : 0];
+    $r9 = ["name"=> "Poco", "y" => isset($this->p4->pluck('val2')[0]) ? $this->p4->pluck('val2')[0] : 0];
+    $r10 = ["name"=> "Nada", "y" => isset($this->p4->pluck('val3')[0]) ? $this->p4->pluck('val3')[0] : 0];
 
     $pregunta4 = [
       "chart" => $type,
