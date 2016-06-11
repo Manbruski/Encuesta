@@ -7,7 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-
+use App\Http\Requests;
+use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     /*
@@ -50,7 +51,7 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users|regex:/(.*)\@utn\.ac\.cr$/i',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -69,4 +70,24 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    protected function validateLogin(Request $request)
+    {
+      //dd('GG');
+        $this->validate($request, [
+            $this->loginUsername() => 'required|regex:/(.*)\@utn\.ac\.cr$/i', 'password' => 'required',
+        ]);
+    }
+
+    public function loginUsername()
+    {
+        return property_exists($this, 'username') ? $this->username : 'email';
+    }
+    public function register() {
+    return redirect('/');
+}
+
+public function showRegistrationForm() {
+    return redirect('/');
+}
 }

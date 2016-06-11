@@ -1,0 +1,41 @@
+.principal
+{
+	margin-top: -8%;
+	margin-left: -8%;
+	width: 115.5%;
+	height: 43em;
+}
+.textPrincipal
+{
+	color: white;
+	font-size: 40px;
+	font-family: fantasy;
+	text-align: center;
+	position: relative;
+	top:10%;
+}
+
+.comparaciones
+{
+	background-color: #90A4AE;
+	height: 339px;
+	margin-top: 3%;
+}
+
+.nav
+{
+	background-color: #90A4AE;
+	height: 86px;
+}
+
+.comp
+{
+	width: 27%;
+	margin-top: 2%;
+	margin-left: 4.7%;
+}
+
+.img
+{
+	
+}
