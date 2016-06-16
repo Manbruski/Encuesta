@@ -1,41 +1,17 @@
-.principal
-{
-	margin-top: -8%;
-	margin-left: -8%;
-	width: 115.5%;
-	height: 43em;
+body {
+		font-family: 'Lato';
+		padding-top: 70px;
 }
-.textPrincipal
+
+.panelColor
 {
-	color: white;
-	font-size: 40px;
-	font-family: fantasy;
+	background-color: #004d40!important;
+	color: white!important;
 	text-align: center;
-	position: relative;
-	top:10%;
 }
-
-.comparaciones
-{
-	background-color: #90A4AE;
-	height: 339px;
-	margin-top: 3%;
+.panel-info{
+    border: 1px solid #004d40!important;
 }
-
-.nav
-{
-	background-color: #90A4AE;
-	height: 86px;
-}
-
-.comp
-{
-	width: 27%;
-	margin-top: 2%;
-	margin-left: 4.7%;
-}
-
-.img
-{
-	
+hr{
+	border: 1px solid #004d40!important;
 }
